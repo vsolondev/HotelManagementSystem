@@ -53,5 +53,13 @@ namespace HotelManagementSystem
             this.Hide();
             transferRoomForm.Show();
         }
+
+        private void btnCheckOut_Click(object sender, EventArgs e)
+        {
+            CheckOutForm checkOutForm = new CheckOutForm(txtTransactionId.Text);
+
+            this.Hide();
+            checkOutForm.Show();
+        }
     }
 }

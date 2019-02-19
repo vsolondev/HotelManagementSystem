@@ -14,3 +14,5 @@ D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj
 D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj\Debug\HotelManagementSystem.CheckInForm.resources
 D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj\Debug\HotelManagementSystem.OccupiedRoomsForm.resources
 D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj\Debug\HotelManagementSystem.TransferRoomForm.resources
+D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj\Debug\HotelManagementSystem.csprojAssemblyReference.cache
+D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj\Debug\HotelManagementSystem.CheckOutForm.resources

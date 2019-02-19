@@ -77,6 +77,7 @@
             this.btnCheckOut.TabIndex = 34;
             this.btnCheckOut.Text = "CheckOut";
             this.btnCheckOut.UseVisualStyleBackColor = true;
+            this.btnCheckOut.Click += new System.EventHandler(this.btnCheckOut_Click);
             // 
             // dgvOccupiedRooms
             // 

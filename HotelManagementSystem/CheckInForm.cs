@@ -8,13 +8,11 @@ namespace HotelManagementSystem
 {
     public partial class CheckInForm : Form
     {
-        private string roomId;
-
         public CheckInForm(string roomId)
         {
             InitializeComponent();
 
-            this.roomId = roomId;
+            txtRoomId.Text = roomId;
         }
 
         private void ClearForm()
@@ -23,11 +21,6 @@ namespace HotelManagementSystem
             txtLastName.Clear();
             txtMiddleName.Clear();
             txtContactNumber.Clear();
-        }
-
-        private void CheckInForm_Load(object sender, EventArgs e)
-        {
-            txtRoomId.Text = roomId;
         }
 
         private void btnCheckIn_Click(object sender, EventArgs e)
@@ -49,14 +42,11 @@ namespace HotelManagementSystem
                 int guestId = db.QueryFirstOrDefault<int>("GetLastInsertedGuest", commandType: CommandType.StoredProcedure);
                 int roomId = int.Parse(txtRoomId.Text);
 
-
                 // We can now create Transaction with the Guest Id
                 TransactionRecord transaction = new TransactionRecord()
                 {
-                    CheckInDate = dtpCheckInDate.Value,
-                    CheckInTime = dtpCheckInTime.Value,
-                    CheckOutDate = dtpCheckOutDate.Value,
-                    CheckOutTime = dtpCheckOutTime.Value,
+                    CheckInDate = DateTime.Now,
+                    CheckInTime = DateTime.Now,
                     GuestId = guestId,
                     RoomId = roomId,
                     Status = "CheckIn"

@@ -28,16 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckOutForm));
             this.txtTransactionId = new System.Windows.Forms.TextBox();
             this.btnCheckOut = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCheckInDate = new System.Windows.Forms.Label();
             this.lblCheckInTime = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblCheckOutDate = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lblCheckOutTime = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.lblRoomName = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.lblRoomType = new System.Windows.Forms.Label();
@@ -56,6 +53,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.txtCashOnHand = new System.Windows.Forms.NumericUpDown();
             this.txtRoomId = new System.Windows.Forms.TextBox();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             ((System.ComponentModel.ISupportInitialize)(this.txtCashOnHand)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +68,7 @@
             // 
             // btnCheckOut
             // 
-            this.btnCheckOut.Location = new System.Drawing.Point(12, 343);
+            this.btnCheckOut.Location = new System.Drawing.Point(11, 278);
             this.btnCheckOut.Name = "btnCheckOut";
             this.btnCheckOut.Size = new System.Drawing.Size(209, 34);
             this.btnCheckOut.TabIndex = 46;
@@ -113,46 +112,10 @@
             this.label4.TabIndex = 49;
             this.label4.Text = "CheckIn Time:";
             // 
-            // lblCheckOutDate
-            // 
-            this.lblCheckOutDate.AutoSize = true;
-            this.lblCheckOutDate.Location = new System.Drawing.Point(208, 94);
-            this.lblCheckOutDate.Name = "lblCheckOutDate";
-            this.lblCheckOutDate.Size = new System.Drawing.Size(46, 17);
-            this.lblCheckOutDate.TabIndex = 52;
-            this.lblCheckOutDate.Text = "label5";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 95);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(108, 17);
-            this.label6.TabIndex = 51;
-            this.label6.Text = "CheckOut Date:";
-            // 
-            // lblCheckOutTime
-            // 
-            this.lblCheckOutTime.AutoSize = true;
-            this.lblCheckOutTime.Location = new System.Drawing.Point(208, 111);
-            this.lblCheckOutTime.Name = "lblCheckOutTime";
-            this.lblCheckOutTime.Size = new System.Drawing.Size(46, 17);
-            this.lblCheckOutTime.TabIndex = 54;
-            this.lblCheckOutTime.Text = "label7";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 112);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(109, 17);
-            this.label8.TabIndex = 53;
-            this.label8.Text = "CheckOut Time:";
-            // 
             // lblRoomName
             // 
             this.lblRoomName.AutoSize = true;
-            this.lblRoomName.Location = new System.Drawing.Point(208, 128);
+            this.lblRoomName.Location = new System.Drawing.Point(208, 94);
             this.lblRoomName.Name = "lblRoomName";
             this.lblRoomName.Size = new System.Drawing.Size(46, 17);
             this.lblRoomName.TabIndex = 56;
@@ -161,7 +124,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 129);
+            this.label10.Location = new System.Drawing.Point(13, 95);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(90, 17);
             this.label10.TabIndex = 55;
@@ -170,7 +133,7 @@
             // lblRoomType
             // 
             this.lblRoomType.AutoSize = true;
-            this.lblRoomType.Location = new System.Drawing.Point(208, 145);
+            this.lblRoomType.Location = new System.Drawing.Point(208, 111);
             this.lblRoomType.Name = "lblRoomType";
             this.lblRoomType.Size = new System.Drawing.Size(54, 17);
             this.lblRoomType.TabIndex = 58;
@@ -179,7 +142,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 146);
+            this.label12.Location = new System.Drawing.Point(13, 112);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(85, 17);
             this.label12.TabIndex = 57;
@@ -188,7 +151,7 @@
             // lblGuestName
             // 
             this.lblGuestName.AutoSize = true;
-            this.lblGuestName.Location = new System.Drawing.Point(208, 162);
+            this.lblGuestName.Location = new System.Drawing.Point(208, 128);
             this.lblGuestName.Name = "lblGuestName";
             this.lblGuestName.Size = new System.Drawing.Size(54, 17);
             this.lblGuestName.TabIndex = 60;
@@ -197,7 +160,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(13, 163);
+            this.label14.Location = new System.Drawing.Point(13, 129);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(91, 17);
             this.label14.TabIndex = 59;
@@ -205,17 +168,18 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(227, 343);
+            this.btnBack.Location = new System.Drawing.Point(226, 278);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(77, 34);
+            this.btnBack.Size = new System.Drawing.Size(96, 34);
             this.btnBack.TabIndex = 61;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // lblTotalPrice
             // 
             this.lblTotalPrice.AutoSize = true;
-            this.lblTotalPrice.Location = new System.Drawing.Point(204, 254);
+            this.lblTotalPrice.Location = new System.Drawing.Point(204, 204);
             this.lblTotalPrice.Name = "lblTotalPrice";
             this.lblTotalPrice.Size = new System.Drawing.Size(16, 17);
             this.lblTotalPrice.TabIndex = 63;
@@ -224,7 +188,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 255);
+            this.label3.Location = new System.Drawing.Point(9, 205);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 17);
             this.label3.TabIndex = 62;
@@ -233,7 +197,7 @@
             // lblChange
             // 
             this.lblChange.AutoSize = true;
-            this.lblChange.Location = new System.Drawing.Point(204, 271);
+            this.lblChange.Location = new System.Drawing.Point(204, 221);
             this.lblChange.Name = "lblChange";
             this.lblChange.Size = new System.Drawing.Size(16, 17);
             this.lblChange.TabIndex = 65;
@@ -242,7 +206,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 272);
+            this.label7.Location = new System.Drawing.Point(9, 222);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 17);
             this.label7.TabIndex = 64;
@@ -251,7 +215,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 295);
+            this.label9.Location = new System.Drawing.Point(8, 245);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(105, 17);
             this.label9.TabIndex = 66;
@@ -260,7 +224,7 @@
             // lblNumberOfDays
             // 
             this.lblNumberOfDays.AutoSize = true;
-            this.lblNumberOfDays.Location = new System.Drawing.Point(204, 237);
+            this.lblNumberOfDays.Location = new System.Drawing.Point(204, 187);
             this.lblNumberOfDays.Name = "lblNumberOfDays";
             this.lblNumberOfDays.Size = new System.Drawing.Size(16, 17);
             this.lblNumberOfDays.TabIndex = 69;
@@ -269,7 +233,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 238);
+            this.label5.Location = new System.Drawing.Point(9, 188);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(117, 17);
             this.label5.TabIndex = 68;
@@ -278,7 +242,7 @@
             // lblRoomPrice
             // 
             this.lblRoomPrice.AutoSize = true;
-            this.lblRoomPrice.Location = new System.Drawing.Point(204, 220);
+            this.lblRoomPrice.Location = new System.Drawing.Point(204, 170);
             this.lblRoomPrice.Name = "lblRoomPrice";
             this.lblRoomPrice.Size = new System.Drawing.Size(16, 17);
             this.lblRoomPrice.TabIndex = 71;
@@ -287,7 +251,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(9, 221);
+            this.label13.Location = new System.Drawing.Point(9, 171);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(85, 17);
             this.label13.TabIndex = 70;
@@ -295,7 +259,7 @@
             // 
             // txtCashOnHand
             // 
-            this.txtCashOnHand.Location = new System.Drawing.Point(207, 290);
+            this.txtCashOnHand.Location = new System.Drawing.Point(207, 240);
             this.txtCashOnHand.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -314,11 +278,26 @@
             this.txtRoomId.Size = new System.Drawing.Size(38, 22);
             this.txtRoomId.TabIndex = 73;
             // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Document = this.printDocument1;
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
+            // 
             // CheckOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(688, 524);
+            this.ClientSize = new System.Drawing.Size(432, 345);
             this.Controls.Add(this.txtRoomId);
             this.Controls.Add(this.txtCashOnHand);
             this.Controls.Add(this.lblRoomPrice);
@@ -337,10 +316,6 @@
             this.Controls.Add(this.label12);
             this.Controls.Add(this.lblRoomName);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.lblCheckOutTime);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.lblCheckOutDate);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.lblCheckInTime);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblCheckInDate);
@@ -363,10 +338,6 @@
         private System.Windows.Forms.Label lblCheckInDate;
         private System.Windows.Forms.Label lblCheckInTime;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblCheckOutDate;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label lblCheckOutTime;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblRoomName;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblRoomType;
@@ -385,5 +356,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown txtCashOnHand;
         private System.Windows.Forms.TextBox txtRoomId;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
     }
 }

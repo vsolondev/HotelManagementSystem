@@ -16,6 +16,7 @@ namespace HotelManagementSystem
     public partial class CheckOutForm : Form
     {
         private string transactionId;
+        private bool isCheckedOut = false;
 
         public CheckOutForm(string transactionId)
         {
@@ -27,16 +28,12 @@ namespace HotelManagementSystem
             var data = GetTransactionByTransactionId(transactionId);
 
             txtTransactionId.Text = transactionId;
-
             txtRoomId.Text = data.RoomId.ToString();
             lblCheckInDate.Text = data.CheckInDate.ToShortDateString();
             lblCheckInTime.Text = data.CheckInTime.ToShortTimeString();
-            lblCheckOutDate.Text = data.CheckOutDate.ToShortDateString();
-            lblCheckOutTime.Text = data.CheckOutTime.ToShortTimeString();
             lblRoomName.Text = data.RoomName.ToString();
             lblRoomType.Text = data.RoomType.ToString();
             lblGuestName.Text = data.FirstName + " " + data.MiddleName + " " + data.LastName;
-
             lblRoomPrice.Text = data.RoomPrice.ToString();
 
             // Get number of days
@@ -78,28 +75,119 @@ namespace HotelManagementSystem
 
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
-            using (var db = DatabaseConnection.Connect())
+            double cashOnHand = double.Parse(txtCashOnHand.Text);
+            double totalPrice = double.Parse(lblTotalPrice.Text);
+
+            if (cashOnHand > totalPrice)
             {
-                // Insert Payment
-                Payment payment = new Payment()
+                using (var db = DatabaseConnection.Connect())
                 {
-                    TotalPrice = double.Parse(lblTotalPrice.Text),
-                    CashOnHand = double.Parse(txtCashOnHand.Text),
-                    CashChange = double.Parse(lblChange.Text),
-                    DateOfPayment = DateTime.Now,
-                    TimeOfPayment = DateTime.Now,
-                    TransactionId = int.Parse(txtTransactionId.Text)
-                };
+                    // To prevent changing the database again after checkout
+                    if (isCheckedOut == false)
+                    {
+                        //Insert Payment
+                        Payment payment = new Payment()
+                        {
+                            TotalPrice = totalPrice,
+                            CashOnHand = cashOnHand,
+                            CashChange = double.Parse(lblChange.Text),
+                            DateOfPayment = DateTime.Now,
+                            TimeOfPayment = DateTime.Now,
+                            TransactionId = int.Parse(txtTransactionId.Text)
+                        };
 
-                db.Query<Payment>("CreatePayment", payment, commandType: CommandType.StoredProcedure);
+                        db.Query<Payment>("CreatePayment", payment, commandType: CommandType.StoredProcedure);
 
-                // Get TransactionId and update the TransactionRecord Status to CheckOut
-                db.QueryFirstOrDefault<int>("UpdateTransactionRecordToCheckOut", new { TransactionId = int.Parse(txtTransactionId.Text) }, commandType: CommandType.StoredProcedure);
+                        // Get TransactionId and update the TransactionRecord Status to CheckOut
+                        db.QueryFirstOrDefault<int>("UpdateTransactionRecordToCheckOut", new { TransactionId = int.Parse(txtTransactionId.Text) }, commandType: CommandType.StoredProcedure);
 
-                // Get RoomId and update the Room Status to Vacant
-                db.QueryFirstOrDefault<int>("UpdateRoomToVacant", new { RoomId = int.Parse(txtRoomId.Text) }, commandType: CommandType.StoredProcedure);
+                        // Get RoomId and update the Room Status to Vacant
+                        db.QueryFirstOrDefault<int>("UpdateRoomToVacant", new { RoomId = int.Parse(txtRoomId.Text) }, commandType: CommandType.StoredProcedure);
+
+                        isCheckedOut = true;
+                    }
+
+                    // Print Receipt
+                    if (printPreviewDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        printDocument1.Print();
+                    }
+                }
             }
-            
+            else
+            {
+                MessageBox.Show("Cash On Hand must be greater than Total Price.");
+            }
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            var font = new Font("Times New Roman", 14, FontStyle.Regular);
+            var brush = Brushes.Black;
+
+            e.Graphics.DrawString(
+                "Check-in Date and Time : " + lblCheckInDate.Text + " " + lblCheckInTime.Text,
+                font,
+                brush,
+                new PointF(50, 30)
+            );
+
+            e.Graphics.DrawString(
+                "Check-out Date and Time : " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString(),
+                font,
+                brush,
+                new PointF(50, 60)
+            );
+
+            e.Graphics.DrawString(
+                "Room Name : " + lblRoomName.Text,
+                font,
+                brush,
+                new PointF(50, 90)
+            );
+
+            e.Graphics.DrawString(
+                "Room Type : " + lblRoomType.Text,
+                font,
+                brush,
+                new PointF(50, 120)
+            );
+
+            e.Graphics.DrawString(
+                "Room Price : " + lblRoomPrice.Text,
+                font,
+                brush,
+                new PointF(50, 150)
+            );
+
+            e.Graphics.DrawString(
+                "Total Price : " + lblTotalPrice.Text,
+                font,
+                brush,
+                new PointF(50, 180)
+            );
+
+            e.Graphics.DrawString(
+                "Cash on Hand : " + txtCashOnHand.Text,
+                font,
+                brush,
+                new PointF(50, 210)
+            );
+
+            e.Graphics.DrawString(
+                "Change : " + lblChange.Text,
+                font,
+                brush,
+                new PointF(50, 240)
+            );
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+            OccupiedRoomsForm occupiedRoomsForm = new OccupiedRoomsForm();
+            occupiedRoomsForm.Show();
         }
     }
 }

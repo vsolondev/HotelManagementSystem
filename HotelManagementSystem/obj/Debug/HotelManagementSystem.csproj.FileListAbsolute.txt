@@ -18,3 +18,5 @@ D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj
 D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj\Debug\HotelManagementSystem.LoginForm.resources
 D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj\Debug\HotelManagementSystem.AdminHomeForm.resources
 D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj\Debug\HotelManagementSystem.ForgotPasswordForm.resources
+D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj\Debug\HotelManagementSystem.RoomForm.resources
+D:\Desktop\HotelManagementSystem\HotelManagementSystem\HotelManagementSystem\obj\Debug\HotelManagementSystem.TransactionRecordsReportForm.resources

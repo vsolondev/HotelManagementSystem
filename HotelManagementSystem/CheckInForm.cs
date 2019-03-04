@@ -47,6 +47,8 @@ namespace HotelManagementSystem
                 {
                     CheckInDate = DateTime.Now,
                     CheckInTime = DateTime.Now,
+                    CheckOutDate = dtpCheckOutDate.Value,
+                    CheckOutTime = dtpCheckOutTime.Value,
                     GuestId = guestId,
                     RoomId = roomId,
                     Status = "CheckIn"

@@ -55,6 +55,10 @@
             this.txtRoomId = new System.Windows.Forms.TextBox();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.lblCheckOutTime = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblCheckOutDate = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txtCashOnHand)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,7 +83,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 61);
+            this.label1.Location = new System.Drawing.Point(13, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 17);
             this.label1.TabIndex = 47;
@@ -88,7 +92,7 @@
             // lblCheckInDate
             // 
             this.lblCheckInDate.AutoSize = true;
-            this.lblCheckInDate.Location = new System.Drawing.Point(208, 60);
+            this.lblCheckInDate.Location = new System.Drawing.Point(208, 36);
             this.lblCheckInDate.Name = "lblCheckInDate";
             this.lblCheckInDate.Size = new System.Drawing.Size(46, 17);
             this.lblCheckInDate.TabIndex = 48;
@@ -97,7 +101,7 @@
             // lblCheckInTime
             // 
             this.lblCheckInTime.AutoSize = true;
-            this.lblCheckInTime.Location = new System.Drawing.Point(208, 77);
+            this.lblCheckInTime.Location = new System.Drawing.Point(208, 53);
             this.lblCheckInTime.Name = "lblCheckInTime";
             this.lblCheckInTime.Size = new System.Drawing.Size(46, 17);
             this.lblCheckInTime.TabIndex = 50;
@@ -106,7 +110,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 78);
+            this.label4.Location = new System.Drawing.Point(13, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 17);
             this.label4.TabIndex = 49;
@@ -115,7 +119,7 @@
             // lblRoomName
             // 
             this.lblRoomName.AutoSize = true;
-            this.lblRoomName.Location = new System.Drawing.Point(208, 94);
+            this.lblRoomName.Location = new System.Drawing.Point(207, 107);
             this.lblRoomName.Name = "lblRoomName";
             this.lblRoomName.Size = new System.Drawing.Size(46, 17);
             this.lblRoomName.TabIndex = 56;
@@ -124,7 +128,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(13, 95);
+            this.label10.Location = new System.Drawing.Point(12, 108);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(90, 17);
             this.label10.TabIndex = 55;
@@ -133,7 +137,7 @@
             // lblRoomType
             // 
             this.lblRoomType.AutoSize = true;
-            this.lblRoomType.Location = new System.Drawing.Point(208, 111);
+            this.lblRoomType.Location = new System.Drawing.Point(207, 124);
             this.lblRoomType.Name = "lblRoomType";
             this.lblRoomType.Size = new System.Drawing.Size(54, 17);
             this.lblRoomType.TabIndex = 58;
@@ -142,7 +146,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(13, 112);
+            this.label12.Location = new System.Drawing.Point(12, 125);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(85, 17);
             this.label12.TabIndex = 57;
@@ -151,7 +155,7 @@
             // lblGuestName
             // 
             this.lblGuestName.AutoSize = true;
-            this.lblGuestName.Location = new System.Drawing.Point(208, 128);
+            this.lblGuestName.Location = new System.Drawing.Point(207, 141);
             this.lblGuestName.Name = "lblGuestName";
             this.lblGuestName.Size = new System.Drawing.Size(54, 17);
             this.lblGuestName.TabIndex = 60;
@@ -160,7 +164,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(13, 129);
+            this.label14.Location = new System.Drawing.Point(12, 142);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(91, 17);
             this.label14.TabIndex = 59;
@@ -293,11 +297,51 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
+            // lblCheckOutTime
+            // 
+            this.lblCheckOutTime.AutoSize = true;
+            this.lblCheckOutTime.Location = new System.Drawing.Point(208, 87);
+            this.lblCheckOutTime.Name = "lblCheckOutTime";
+            this.lblCheckOutTime.Size = new System.Drawing.Size(46, 17);
+            this.lblCheckOutTime.TabIndex = 77;
+            this.lblCheckOutTime.Text = "label3";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 88);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(109, 17);
+            this.label6.TabIndex = 76;
+            this.label6.Text = "CheckOut Time:";
+            // 
+            // lblCheckOutDate
+            // 
+            this.lblCheckOutDate.AutoSize = true;
+            this.lblCheckOutDate.Location = new System.Drawing.Point(208, 70);
+            this.lblCheckOutDate.Name = "lblCheckOutDate";
+            this.lblCheckOutDate.Size = new System.Drawing.Size(46, 17);
+            this.lblCheckOutDate.TabIndex = 75;
+            this.lblCheckOutDate.Text = "label2";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(13, 71);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(108, 17);
+            this.label11.TabIndex = 74;
+            this.label11.Text = "CheckOut Date:";
+            // 
             // CheckOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(432, 345);
+            this.Controls.Add(this.lblCheckOutTime);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lblCheckOutDate);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.txtRoomId);
             this.Controls.Add(this.txtCashOnHand);
             this.Controls.Add(this.lblRoomPrice);
@@ -358,5 +402,9 @@
         private System.Windows.Forms.TextBox txtRoomId;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Windows.Forms.Label lblCheckOutTime;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblCheckOutDate;
+        private System.Windows.Forms.Label label11;
     }
 }

@@ -20,6 +20,7 @@ namespace HotelManagementSystem
             using (var db = DatabaseConnection.Connect())
             {
                 dgvUser.DataSource = db.Query<User>("SearchUsers", new { searchString = searchString }, commandType: CommandType.StoredProcedure).ToList();
+                dgvUser.Columns["Pin"].Visible = false;
             }
         }
 

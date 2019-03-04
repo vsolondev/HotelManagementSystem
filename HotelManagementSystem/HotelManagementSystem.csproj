@@ -74,6 +74,7 @@
     <Compile Include="ForgotPasswordForm.Designer.cs">
       <DependentUpon>ForgotPasswordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="JoinTables\TransactionRecordRoomGuestPayment.cs" />
     <Compile Include="JoinTables\TransactionRecordRoomGuest.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -89,6 +90,18 @@
     </Compile>
     <Compile Include="OccupiedRoomsForm.Designer.cs">
       <DependentUpon>OccupiedRoomsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoomForm.Designer.cs">
+      <DependentUpon>RoomForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TransactionRecordsReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TransactionRecordsReportForm.Designer.cs">
+      <DependentUpon>TransactionRecordsReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TransferRoomForm.cs">
       <SubType>Form</SubType>
@@ -132,6 +145,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OccupiedRoomsForm.resx">
       <DependentUpon>OccupiedRoomsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoomForm.resx">
+      <DependentUpon>RoomForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TransactionRecordsReportForm.resx">
+      <DependentUpon>TransactionRecordsReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TransferRoomForm.resx">
       <DependentUpon>TransferRoomForm.cs</DependentUpon>

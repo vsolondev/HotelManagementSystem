@@ -31,6 +31,8 @@ namespace HotelManagementSystem
             txtRoomId.Text = data.RoomId.ToString();
             lblCheckInDate.Text = data.CheckInDate.ToShortDateString();
             lblCheckInTime.Text = data.CheckInTime.ToShortTimeString();
+            lblCheckOutDate.Text = data.CheckOutDate.ToShortDateString();
+            lblCheckOutTime.Text = data.CheckOutTime.ToShortTimeString();
             lblRoomName.Text = data.RoomName.ToString();
             lblRoomType.Text = data.RoomType.ToString();
             lblGuestName.Text = data.FirstName + " " + data.MiddleName + " " + data.LastName;
@@ -45,7 +47,17 @@ namespace HotelManagementSystem
                                             data.CheckInTime.Minute,
                                             data.CheckInTime.Second
                                       );
-            var numberOfDays = Math.Ceiling( (DateTime.Now - checkIn).TotalDays );
+
+            var checkOut = new DateTime(
+                                            data.CheckOutDate.Year,
+                                            data.CheckOutDate.Month,
+                                            data.CheckOutDate.Day,
+                                            data.CheckOutTime.Hour,
+                                            data.CheckOutTime.Minute,
+                                            data.CheckOutTime.Second
+                                      );
+
+            var numberOfDays = Math.Ceiling( (checkOut - checkIn).TotalDays );
 
             lblNumberOfDays.Text = numberOfDays.ToString();
             lblTotalPrice.Text = (numberOfDays * data.RoomPrice).ToString();
@@ -78,7 +90,7 @@ namespace HotelManagementSystem
             double cashOnHand = double.Parse(txtCashOnHand.Text);
             double totalPrice = double.Parse(lblTotalPrice.Text);
 
-            if (cashOnHand > totalPrice)
+            if (cashOnHand >= totalPrice)
             {
                 using (var db = DatabaseConnection.Connect())
                 {
@@ -107,6 +119,9 @@ namespace HotelManagementSystem
                         isCheckedOut = true;
                     }
 
+                    // Maximized Print Preview Dialog
+                    ((Form)printPreviewDialog1).WindowState = FormWindowState.Maximized;
+
                     // Print Receipt
                     if (printPreviewDialog1.ShowDialog() == DialogResult.OK)
                     {
@@ -122,7 +137,7 @@ namespace HotelManagementSystem
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            var font = new Font("Times New Roman", 14, FontStyle.Regular);
+            var font = new Font("Times New Roman", 18, FontStyle.Regular);
             var brush = Brushes.Black;
 
             e.Graphics.DrawString(

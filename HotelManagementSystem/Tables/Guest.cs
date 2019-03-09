@@ -7,5 +7,6 @@
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public string ContactNumber { get; set; }
+        public string Accompany { get; set; }
     }
 }

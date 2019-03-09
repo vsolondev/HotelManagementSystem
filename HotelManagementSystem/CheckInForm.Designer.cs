@@ -43,6 +43,11 @@
             this.dtpCheckOutDate = new System.Windows.Forms.DateTimePicker();
             this.dtpCheckOutTime = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtAccompany = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtDownPayment = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDownPayment)).BeginInit();
             this.SuspendLayout();
             // 
             // txtRoomId
@@ -119,7 +124,7 @@
             // 
             // btnCheckIn
             // 
-            this.btnCheckIn.Location = new System.Drawing.Point(9, 350);
+            this.btnCheckIn.Location = new System.Drawing.Point(9, 556);
             this.btnCheckIn.Name = "btnCheckIn";
             this.btnCheckIn.Size = new System.Drawing.Size(106, 34);
             this.btnCheckIn.TabIndex = 17;
@@ -129,7 +134,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(138, 350);
+            this.btnClear.Location = new System.Drawing.Point(138, 556);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(104, 34);
             this.btnClear.TabIndex = 18;
@@ -140,7 +145,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 236);
+            this.label1.Location = new System.Drawing.Point(9, 399);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 17);
             this.label1.TabIndex = 19;
@@ -149,7 +154,7 @@
             // dtpCheckOutDate
             // 
             this.dtpCheckOutDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpCheckOutDate.Location = new System.Drawing.Point(9, 257);
+            this.dtpCheckOutDate.Location = new System.Drawing.Point(9, 420);
             this.dtpCheckOutDate.Name = "dtpCheckOutDate";
             this.dtpCheckOutDate.Size = new System.Drawing.Size(233, 22);
             this.dtpCheckOutDate.TabIndex = 20;
@@ -157,7 +162,7 @@
             // dtpCheckOutTime
             // 
             this.dtpCheckOutTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpCheckOutTime.Location = new System.Drawing.Point(9, 303);
+            this.dtpCheckOutTime.Location = new System.Drawing.Point(9, 466);
             this.dtpCheckOutTime.Name = "dtpCheckOutTime";
             this.dtpCheckOutTime.ShowUpDown = true;
             this.dtpCheckOutTime.Size = new System.Drawing.Size(233, 22);
@@ -166,17 +171,60 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 282);
+            this.label2.Location = new System.Drawing.Point(9, 445);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 17);
             this.label2.TabIndex = 21;
             this.label2.Text = "CheckOutTime";
             // 
+            // txtAccompany
+            // 
+            this.txtAccompany.Location = new System.Drawing.Point(9, 256);
+            this.txtAccompany.Multiline = true;
+            this.txtAccompany.Name = "txtAccompany";
+            this.txtAccompany.Size = new System.Drawing.Size(233, 140);
+            this.txtAccompany.TabIndex = 23;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 236);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(106, 17);
+            this.label3.TabIndex = 24;
+            this.label3.Text = "ContactNumber";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 495);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 17);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "DownPayment";
+            // 
+            // txtDownPayment
+            // 
+            this.txtDownPayment.DecimalPlaces = 2;
+            this.txtDownPayment.Location = new System.Drawing.Point(9, 516);
+            this.txtDownPayment.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.txtDownPayment.Name = "txtDownPayment";
+            this.txtDownPayment.Size = new System.Drawing.Size(233, 22);
+            this.txtDownPayment.TabIndex = 26;
+            // 
             // CheckInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(267, 420);
+            this.ClientSize = new System.Drawing.Size(267, 624);
+            this.Controls.Add(this.txtDownPayment);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtAccompany);
             this.Controls.Add(this.dtpCheckOutTime);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtpCheckOutDate);
@@ -194,6 +242,7 @@
             this.Controls.Add(this.txtRoomId);
             this.Name = "CheckInForm";
             this.Text = "CheckInForm";
+            ((System.ComponentModel.ISupportInitialize)(this.txtDownPayment)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,5 +264,9 @@
         private System.Windows.Forms.DateTimePicker dtpCheckOutDate;
         private System.Windows.Forms.DateTimePicker dtpCheckOutTime;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtAccompany;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown txtDownPayment;
     }
 }

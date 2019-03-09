@@ -22,10 +22,17 @@ namespace HotelManagementSystem
         {
             InitializeComponent();
 
+            // Hide up and down button
+            txtCashOnHand.Controls[0].Hide();
+            txtAdditionalCharges.Controls[0].Hide();
+
             this.transactionId = transactionId;
 
 
             var data = GetTransactionByTransactionId(transactionId);
+
+            // Get Downpayment
+            double downPayment = GetDownPaymentByTransactionId(transactionId);
 
             txtTransactionId.Text = transactionId;
             txtRoomId.Text = data.RoomId.ToString();
@@ -60,7 +67,19 @@ namespace HotelManagementSystem
             var numberOfDays = Math.Ceiling( (checkOut - checkIn).TotalDays );
 
             lblNumberOfDays.Text = numberOfDays.ToString();
-            lblTotalPrice.Text = (numberOfDays * data.RoomPrice).ToString();
+            lblBasePrice.Text = (numberOfDays * data.RoomPrice).ToString();
+            lblTotalPrice.Text = lblBasePrice.Text;
+
+            if (downPayment >= double.Parse(lblTotalPrice.Text))
+            {
+                lblChange.Text = (downPayment - double.Parse(lblTotalPrice.Text)).ToString();
+            }
+            else
+            {
+                lblChange.Text = "0";
+            }
+
+            lblDownPayment.Text = downPayment.ToString();
         }
 
         private TransactionRecordRoomGuest GetTransactionByTransactionId(string transactionId)
@@ -73,33 +92,59 @@ namespace HotelManagementSystem
             }
         }
 
+        private double GetDownPaymentByTransactionId(string transactionId)
+        {
+            using (var db = DatabaseConnection.Connect())
+            {
+                double downPayment = db.Query<double>("GetDownPaymentByTransactionId", new { TransactionId = transactionId }, commandType: CommandType.StoredProcedure).ToList().FirstOrDefault();
+
+                return downPayment;
+            }
+        }
+
         private void txtCashOnHand_KeyUp(object sender, KeyEventArgs e)
         {
             if (txtCashOnHand.Text == "")
             {
                 txtCashOnHand.Text = "0";
             }
+            
+            double additionalCharges = double.Parse(txtAdditionalCharges.Value.ToString());
+            double basePrice = double.Parse(lblBasePrice.Text);
+            double cashOnHand = double.Parse(txtCashOnHand.Value.ToString());
+            double downPayment = double.Parse(lblDownPayment.Text);
 
-            double change = double.Parse(txtCashOnHand.Text) - double.Parse(lblTotalPrice.Text);
+            lblTotalPrice.Text = (basePrice + additionalCharges).ToString();
 
-            lblChange.Text = change.ToString();
+            double change = (cashOnHand + downPayment) - (basePrice + additionalCharges);
+            if (change >= 0)
+            {
+                lblChange.Text = change.ToString();
+            }
+            else
+            {
+                lblChange.Text = "0";
+            }
         }
 
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
+            double downPayment = double.Parse(lblDownPayment.Text);
             double cashOnHand = double.Parse(txtCashOnHand.Text);
             double totalPrice = double.Parse(lblTotalPrice.Text);
 
-            if (cashOnHand >= totalPrice)
+            if (downPayment + cashOnHand >= totalPrice)
             {
                 using (var db = DatabaseConnection.Connect())
                 {
                     // To prevent changing the database again after checkout
                     if (isCheckedOut == false)
                     {
-                        //Insert Payment
+                        //Update Payment
                         Payment payment = new Payment()
                         {
+                            AdditionalCharges = double.Parse(txtAdditionalCharges.Value.ToString()),
+                            BasePrice = double.Parse(lblBasePrice.Text),
                             TotalPrice = totalPrice,
                             CashOnHand = cashOnHand,
                             CashChange = double.Parse(lblChange.Text),
@@ -108,7 +153,7 @@ namespace HotelManagementSystem
                             TransactionId = int.Parse(txtTransactionId.Text)
                         };
 
-                        db.Query<Payment>("CreatePayment", payment, commandType: CommandType.StoredProcedure);
+                        db.Query<Payment>("UpdatePayment", payment, commandType: CommandType.StoredProcedure);
 
                         // Get TransactionId and update the TransactionRecord Status to CheckOut
                         db.QueryFirstOrDefault<int>("UpdateTransactionRecordToCheckOut", new { TransactionId = int.Parse(txtTransactionId.Text) }, commandType: CommandType.StoredProcedure);
@@ -176,24 +221,38 @@ namespace HotelManagementSystem
             );
 
             e.Graphics.DrawString(
-                "Total Price : " + lblTotalPrice.Text,
+                "Base Price : " + lblBasePrice.Text,
                 font,
                 brush,
                 new PointF(50, 180)
             );
 
             e.Graphics.DrawString(
-                "Cash on Hand : " + txtCashOnHand.Text,
+                "Total Price : " + lblTotalPrice.Text,
                 font,
                 brush,
                 new PointF(50, 210)
             );
 
             e.Graphics.DrawString(
-                "Change : " + lblChange.Text,
+                "Down Payment : " + lblDownPayment.Text,
                 font,
                 brush,
                 new PointF(50, 240)
+            );
+
+            e.Graphics.DrawString(
+                "Cash on Hand : " + txtCashOnHand.Text,
+                font,
+                brush,
+                new PointF(50, 270)
+            );
+
+            e.Graphics.DrawString(
+                "Change : " + lblChange.Text,
+                font,
+                brush,
+                new PointF(50, 300)
             );
         }
 
@@ -203,6 +262,26 @@ namespace HotelManagementSystem
 
             OccupiedRoomsForm occupiedRoomsForm = new OccupiedRoomsForm();
             occupiedRoomsForm.Show();
+        }
+
+        private void txtAdditionalCharges_KeyUp(object sender, KeyEventArgs e)
+        {
+            double additionalCharges = double.Parse(txtAdditionalCharges.Value.ToString());
+            double basePrice = double.Parse(lblBasePrice.Text);
+            double cashOnHand = double.Parse(txtCashOnHand.Value.ToString());
+            double downPayment = double.Parse(lblDownPayment.Text);
+
+            lblTotalPrice.Text = (basePrice + additionalCharges).ToString();
+
+            double change = (cashOnHand + downPayment) - (basePrice + additionalCharges);
+            if (change >= 0)
+            {
+                lblChange.Text = change.ToString();
+            }
+            else
+            {
+                lblChange.Text = "0";
+            }
         }
     }
 }

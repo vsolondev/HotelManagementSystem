@@ -91,6 +91,7 @@
             this.dgvOccupiedRooms.Size = new System.Drawing.Size(931, 341);
             this.dgvOccupiedRooms.TabIndex = 33;
             this.dgvOccupiedRooms.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOccupiedRooms_CellClick);
+            this.dgvOccupiedRooms.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOccupiedRooms_CellDoubleClick);
             // 
             // btnTransfer
             // 

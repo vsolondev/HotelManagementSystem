@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Dapper;
 using HotelManagementSystem.JoinTables;
+using HotelManagementSystem.Tables;
 
 namespace HotelManagementSystem
 {
@@ -60,6 +61,26 @@ namespace HotelManagementSystem
 
             this.Hide();
             checkOutForm.Show();
+        }
+
+        private void dgvOccupiedRooms_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var cells = dgvOccupiedRooms.CurrentRow.Cells;
+
+            Guest guest = new Guest
+            {
+                GuestId = int.Parse(cells[12].Value.ToString()),
+                FirstName = cells[13].Value.ToString(),
+                LastName = cells[14].Value.ToString(),
+                MiddleName = cells[15].Value.ToString(),
+                ContactNumber = cells[16].Value.ToString(),
+                Accompany = cells[17].Value != null ? cells[17].Value.ToString() : ""
+        };
+
+            GuestInformationForm guestInformationForm = new GuestInformationForm(guest);
+
+            this.Hide();
+            guestInformationForm.Show();
         }
     }
 }

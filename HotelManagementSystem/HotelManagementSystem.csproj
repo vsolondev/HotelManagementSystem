@@ -74,6 +74,12 @@
     <Compile Include="ForgotPasswordForm.Designer.cs">
       <DependentUpon>ForgotPasswordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GuestInformationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GuestInformationForm.Designer.cs">
+      <DependentUpon>GuestInformationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="JoinTables\TransactionRecordRoomGuestPayment.cs" />
     <Compile Include="JoinTables\TransactionRecordRoomGuest.cs" />
     <Compile Include="LoginForm.cs">
@@ -139,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ForgotPasswordForm.resx">
       <DependentUpon>ForgotPasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuestInformationForm.resx">
+      <DependentUpon>GuestInformationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

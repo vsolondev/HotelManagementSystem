@@ -33,7 +33,8 @@ namespace HotelManagementSystem
                     FirstName = txtFirstName.Text,
                     LastName = txtLastName.Text,
                     MiddleName = txtMiddleName.Text != "" ? txtMiddleName.Text : "",
-                    ContactNumber = txtContactNumber.Text
+                    ContactNumber = txtContactNumber.Text,
+                    Accompany = txtAccompany.Text
                 };
 
                 db.Query<Guest>("CreateGuest", guest, commandType: CommandType.StoredProcedure);
@@ -59,6 +60,24 @@ namespace HotelManagementSystem
 
                 // Update selected room to occupied
                 db.Query<TransactionRecord>("UpdateRoomToOccupied", new { roomId = roomId }, commandType: CommandType.StoredProcedure);
+
+                // Get Last Inserted Transaction Record
+                int transactionId = db.QueryFirstOrDefault<int>("GetLastInsertedTransactionRecord", commandType: CommandType.StoredProcedure);
+
+                //Insert Payment to add downpayment
+                Payment payment = new Payment()
+                {
+                    DownPayment = double.Parse(txtDownPayment.Value.ToString()),
+                    BasePrice = 0,
+                    TotalPrice = 0,
+                    CashOnHand = 0,
+                    CashChange = 0,
+                    DateOfPayment = DateTime.Now,
+                    TimeOfPayment = DateTime.Now,
+                    TransactionId = transactionId
+                };
+
+                db.Query<Payment>("CreatePayment", payment, commandType: CommandType.StoredProcedure);
 
                 ClearForm();
 
